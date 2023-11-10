@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from "react";
 import { useState } from "react";
 
+import Image from "next/image";
 import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
