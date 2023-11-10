@@ -3,9 +3,10 @@ import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getClientConfig } from "./config/client";
+import { type Metadata } from "next";
 
-export const metadata = {
-  title: "Xiao-Ming Chat",
+export const metadata: Metadata = {
+  title: "Xiao-Ming's ChatGPT",
   description: "Your personal ChatGPT Chat Bot.",
   viewport: {
     width: "device-width",
@@ -17,7 +18,7 @@ export const metadata = {
     { media: "(prefers-color-scheme: dark)", color: "#151515" },
   ],
   appleWebApp: {
-    title: "Xiao-Ming Chat",
+    title: "Xiao-Ming's ChatGPT",
     statusBarStyle: "default",
   },
 };
