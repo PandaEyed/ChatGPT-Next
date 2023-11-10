@@ -151,10 +151,8 @@ export function SideBar(props: { className?: string }) {
   const closePopup = () => {
     setIsPopupOpen(false);
   };
-
-  useEffect(() => {
-    useHotKey();
-  }, []);
+  
+  useHotKey();
 
   return (
     <div
@@ -168,7 +166,7 @@ export function SideBar(props: { className?: string }) {
     >
       <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          Xiao-Ming's ChatGPT
+          Xiao-Ming&apos;s ChatGPT
         </div>
         <div className={styles["sidebar-sub-title"]}>
           知识库已更新至 2023 年 4 月。
@@ -241,7 +239,7 @@ export function SideBar(props: { className?: string }) {
             <div className={styles["popup-content"]}>
               <h1>联系小明</h1>
               <p>如果使用中遇到任何问题，请联系我。</p>
-              <img src={<WechatPng/>} alt="Xiao-Ming's WeChat" />
+              <Image src={<WechatPng/>} alt="Xiao-Ming's WeChat" />
               <button onClick={closePopup}>关闭</button>
             </div>
           </div>
