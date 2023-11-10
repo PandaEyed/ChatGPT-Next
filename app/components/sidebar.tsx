@@ -12,6 +12,7 @@ import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
 import DragIcon from "../icons/drag.svg";
+import WechatPng from "../icons/wechat.png"
 
 import Locale from "../locales";
 
@@ -140,6 +141,15 @@ export function SideBar(props: { className?: string }) {
     () => isIOS() && isMobileScreen,
     [isMobileScreen],
   );
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   useHotKey();
 
@@ -155,10 +165,11 @@ export function SideBar(props: { className?: string }) {
     >
       <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          ChatGPT Next
+          Xiao-Ming's ChatGPT
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Build your own AI assistant.
+          知识库已更新至 2023 年 4 月。
+          私人内测 请勿外传
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
@@ -217,11 +228,21 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            <button onClick={openPopup}>
               <IconButton icon={<GithubIcon />} shadow />
-            </a>
+            </button>
           </div>
         </div>
+        {isPopupOpen && (
+          <div className={styles["popup-container"]}>
+            <div className={styles["popup-content"]}>
+              <h1>联系小明</h1>
+              <p>如果使用中遇到任何问题，请联系我。</>
+              <img src={<WechatPng/>} alt="Xiao-Ming's WeChat" />
+              <button onClick={closePopup}>关闭</button>
+            </div>
+          </div>
+        )}
         <div>
           <IconButton
             icon={<AddIcon />}
