@@ -240,7 +240,7 @@ export function SideBar(props: { className?: string }) {
           <div className={styles["popup-container"]}>
             <div className={styles["popup-content"]}>
               <h1>联系小明</h1>
-              <p>如果使用中遇到任何问题，请联系我。</>
+              <p>如果使用中遇到任何问题，请联系我。</p>
               <img src={<WechatPng/>} alt="Xiao-Ming's WeChat" />
               <button onClick={closePopup}>关闭</button>
             </div>
