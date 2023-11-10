@@ -152,7 +152,9 @@ export function SideBar(props: { className?: string }) {
     setIsPopupOpen(false);
   };
 
-  useHotKey();
+  useEffect(() => {
+    useHotKey();
+  }, []);
 
   return (
     <div
