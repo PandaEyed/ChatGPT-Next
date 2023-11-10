@@ -1,4 +1,5 @@
 import { useEffect, useRef, useMemo } from "react";
+import { useState } from "react";
 
 import styles from "./home.module.scss";
 
