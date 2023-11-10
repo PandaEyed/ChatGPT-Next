@@ -514,7 +514,7 @@ export function ImagePreviewer(props: {
           </div>
 
           <div>
-            <div className={styles["main-title"]}>Xiao-Ming's ChatGPT</div>
+            <div className={styles["main-title"]}>Xiao-Ming&apos;s ChatGPT</div>
             <div className={styles["sub-title"]}>
               基于 OpenAI & ChatGPT-Next-Web 打造的个人 AI 助手
             </div>
