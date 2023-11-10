@@ -170,7 +170,7 @@ export function SideBar(props: { className?: string }) {
           Xiao-Ming&apos;s ChatGPT
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Welcome to XiaoMing's ChatGPT.
+          Welcome to XiaoMing&apos;s ChatGPT.
           私人内测 请勿外传
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
