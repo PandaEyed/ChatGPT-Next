@@ -15,6 +15,7 @@ import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
 import DragIcon from "../icons/drag.svg";
 import WechatPng from "../icons/wechat.png";
+import WeChatIcon from "../icons/wechat.svg";
 
 import Locale from "../locales";
 
@@ -152,14 +153,13 @@ export function SideBar(props: { className?: string }) {
   const closePopup = () => {
     setIsPopupOpen(false);
   };
-  
+
   useHotKey();
 
   return (
     <div
-      className={`${styles.sidebar} ${props.className} ${
-        shouldNarrow && styles["narrow-sidebar"]
-      }`}
+      className={`${styles.sidebar} ${props.className} ${shouldNarrow && styles["narrow-sidebar"]
+        }`}
       style={{
         // #3016 disable transition on ios mobile screen
         transition: isMobileScreen && isIOSMobile ? "none" : undefined,
@@ -232,9 +232,7 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
-            <button onClick={openPopup}>
-              <IconButton icon={<GithubIcon />} shadow />
-            </button>
+            <IconButton icon={<WeChatIcon />} onClick={openPopup} />
           </div>
         </div>
         {isPopupOpen && (
@@ -243,7 +241,7 @@ export function SideBar(props: { className?: string }) {
               <h1>联系小明</h1>
               <p>如果使用中遇到任何问题，请联系我。</p>
               <Image src={WechatPng} alt="Xiao-Ming's WeChat" />
-              <button onClick={closePopup}>关闭</button>
+              <IconButton icon={<CloseIcon />} onClick={closePopup} />
             </div>
           </div>
         )}
