@@ -14,7 +14,7 @@ import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
 import DragIcon from "../icons/drag.svg";
-import WechatPng from "../icons/qrcode.svg";
+import WechatPng from "../icons/wechat.png";
 import WeChatIcon from "../icons/wechat.svg";
 
 import Locale from "../locales";
