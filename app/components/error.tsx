@@ -1,26 +1,53 @@
+import { useEffect, useRef, useMemo } from "react";
+import { useState } from "react";
 import React from "react";
 import { IconButton } from "./button";
+import Image from "next/image";
+import styles from "./home.module.scss";
 import GithubIcon from "../icons/github.svg";
+import CloseIcon from "../icons/close.svg";
 import ResetIcon from "../icons/reload.svg";
 import { ISSUE_URL } from "../constant";
 import Locale from "../locales";
 import { showConfirm } from "./ui-lib";
 import { useSyncStore } from "../store/sync";
+import { useChatStore } from "../store";
+import WechatPng from "../icons/wechat.png";
+import WeChatIcon from "../icons/wechat.svg";
 
 interface IErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
   info: React.ErrorInfo | null;
+  isPopupOpen: boolean;
 }
+
+interface PopupProps {
+  onClose: () => void;
+}
+
+const Popup: React.FC<PopupProps> = ({ onClose }) => {
+  return (
+    <div className={styles["popup-container"]}>
+      <div className={styles["popup-content"]}>
+        <h1>联系小明</h1>
+        <p>如果使用中遇到任何问题，请联系我。</p>
+        <Image src={WechatPng} alt="Xiao-Ming's WeChat" />
+        <IconButton icon={<CloseIcon />} onClick={onClose} />
+      </div>
+    </div>
+  );
+};
 
 export class ErrorBoundary extends React.Component<any, IErrorBoundaryState> {
   constructor(props: any) {
     super(props);
-    this.state = { hasError: false, error: null, info: null };
+    this.state = { hasError: false, error: null, info: null, isPopupOpen: false };
+    this.openPopup = this.openPopup.bind(this);
+    this.closePopup = this.closePopup.bind(this);
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    // Update state with error details
     this.setState({ hasError: true, error, info });
   }
 
@@ -33,9 +60,16 @@ export class ErrorBoundary extends React.Component<any, IErrorBoundaryState> {
     }
   }
 
+  openPopup() {
+    this.setState({ isPopupOpen: true });
+  }
+
+  closePopup() {
+    this.setState({ isPopupOpen: false });
+  }
+
   render() {
     if (this.state.hasError) {
-      // Render error message
       return (
         <div className="error">
           <h2>Oops, something went wrong!</h2>
@@ -45,13 +79,11 @@ export class ErrorBoundary extends React.Component<any, IErrorBoundaryState> {
           </pre>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <a href={ISSUE_URL} className="report">
               <IconButton
                 text="Report This Error"
-                icon={<GithubIcon />}
-                bordered
+                icon={<WeChatIcon />} onClick={this.openPopup} bordered
               />
-            </a>
+              {this.state.isPopupOpen && <Popup onClose={this.closePopup} />}
             <IconButton
               icon={<ResetIcon />}
               text="Clear All Data"
@@ -66,7 +98,8 @@ export class ErrorBoundary extends React.Component<any, IErrorBoundaryState> {
         </div>
       );
     }
-    // if no error occurred, render children
     return this.props.children;
   }
 }
+
+export default ErrorBoundary;
