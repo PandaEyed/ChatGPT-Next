@@ -57,10 +57,6 @@ export function auth(req: NextRequest) {
       let disableGPT4 = !!process.env.DISABLE_GPT4;
       if (accessCode.includes('Tech')) {
         disableGPT4 = true;
-        if (customModels) customModels += ",";
-        customModels += DEFAULT_MODELS.filter((m) => m.name.startsWith("gpt-4"))
-          .map((m) => "-" + m.name)
-          .join(",");
       }
       console.log('Final DISABLE_GPT4:', disableGPT4);
 
