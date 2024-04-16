@@ -36,10 +36,13 @@ const ACCESS_CODES = (function getAccessCodes(): Set<string> {
   try {
     const codes = (code?.split(",") ?? [])
       .filter((v) => !!v)
-      .map((v) => md5.hash(v.trim()));
-    return new Set(codes);
+      .map((v) => {
+        const [accessCode, apiKey] = v.split(':');
+        return [md5.hash(accessCode.trim()), apiKey];
+      });
+    return new Map(codes);
   } catch (e) {
-    return new Set();
+    return new Map();
   }
 })();
 
@@ -49,7 +52,7 @@ export const getServerSideConfig = () => {
       "[Server Config] you are importing a nodejs-only module outside of nodejs",
     );
   }
-
+  const apiKey = ACCESS_CODES.get(md5.hash(accessCode));
   const disableGPT4 = !!process.env.DISABLE_GPT4;
   let customModels = process.env.CUSTOM_MODELS ?? "";
 
@@ -64,7 +67,8 @@ export const getServerSideConfig = () => {
 
   return {
     baseUrl: process.env.BASE_URL,
-    apiKey: process.env.OPENAI_API_KEY,
+    // apiKey: process.env.OPENAI_API_KEY,
+    apiKey,   
     openaiOrgId: process.env.OPENAI_ORG_ID,
 
     isAzure,
