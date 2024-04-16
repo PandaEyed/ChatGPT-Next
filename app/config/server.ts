@@ -32,19 +32,23 @@ declare global {
 
 const ACCESS_CODES = (function getAccessCodes(): Map<string,string> {
   const code = process.env.CODE;
-
   try {
     const codes = (code?.split(",") ?? [])
       .filter((v) => !!v)
       .map((v) => {
         const [accessCode, apiKey] = v.split(':');
-        return [md5.hash(accessCode.trim()), apiKey];
+        if (!accessCode || !apiKey) {
+          throw new Error('Invalid code or apiKey');
+        }
+        return [md5.hash(accessCode.trim()), apiKey] as [string, string];
       });
     return new Map(codes);
   } catch (e) {
     return new Map();
   }
 })();
+
+
 
 export const getServerSideConfig = () => {
   if (typeof process === "undefined") {
