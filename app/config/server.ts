@@ -30,7 +30,7 @@ declare global {
   }
 }
 
-const ACCESS_CODES = (function getAccessCodes(): Set<string> {
+const ACCESS_CODES = (function getAccessCodes(): Map<string,string> {
   const code = process.env.CODE;
 
   try {
