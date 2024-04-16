@@ -53,6 +53,11 @@ export function auth(req: NextRequest) {
       // : serverConfig.apiKey;
       : serverConfig.codes.get(hashedCode);
 
+      let disableGPT4 = !!process.env.DISABLE_GPT4;
+      if (accessCode.includes('Tech')) {
+        disableGPT4 = true;
+      }
+      
     if (serverApiKey) {
       console.log("[Auth] use system api key");
       req.headers.set(
