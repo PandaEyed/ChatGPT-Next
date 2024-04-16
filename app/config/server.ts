@@ -56,7 +56,7 @@ export const getServerSideConfig = () => {
       "[Server Config] you are importing a nodejs-only module outside of nodejs",
     );
   }
-  const apiKey = ACCESS_CODES.get(md5.hash(accessCode));
+  // const apiKey = ACCESS_CODES.get(md5.hash(accessCode));
   const disableGPT4 = !!process.env.DISABLE_GPT4;
   let customModels = process.env.CUSTOM_MODELS ?? "";
 
