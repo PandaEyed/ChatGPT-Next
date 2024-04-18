@@ -52,7 +52,6 @@ export function auth(req: NextRequest) {
       ? serverConfig.azureApiKey
       // : serverConfig.apiKey;
       : serverConfig.codes.get(hashedCode);
-      const disableGPT4 = !!process.env.DISABLE_GPT4;
       let customModels = process.env.CUSTOM_MODELS ?? "";
       console.log('Access Code:', accessCode);
       let disableGPT4 = !!process.env.DISABLE_GPT4;
