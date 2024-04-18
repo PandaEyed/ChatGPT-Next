@@ -7,8 +7,8 @@ const cn = {
   WIP: "该功能仍在开发中……",
   Error: {
     Unauthorized: isApp
-      ? "检测到无效 API Key，请前往[设置](/#/settings)页检查 API Key 是否配置正确。"
-      : "访问密码不正确或为空，请前往[登录](/#/auth)页输入正确的访问密码，或者在[设置](/#/settings)页填入你自己的 OpenAI API Key。",
+      ? "检测到无效 API Key，请联系小明检查 API Key 是否配置正确。"
+      : "访问密码不正确或为空，请前往[登录](/#/auth)页输入正确的访问密码",
   },
   Auth: {
     Title: "需要密码",
@@ -160,14 +160,14 @@ const cn = {
       SubTitle: "用户最新的一条消息会填充到此模板",
     },
 
-    Update: {
-      Version: (x: string) => `当前版本：${x}`,
-      IsLatest: "已是最新版本",
-      CheckUpdate: "检查更新",
-      IsChecking: "正在检查更新...",
-      FoundUpdate: (x: string) => `发现新版本：${x}`,
-      GoToUpdate: "前往更新",
-    },
+    // Update: {
+    //   Version: (x: string) => `当前版本：${x}`,
+    //   IsLatest: "已是最新版本",
+    //   CheckUpdate: "检查更新",
+    //   IsChecking: "正在检查更新...",
+    //   FoundUpdate: (x: string) => `发现新版本：${x}`,
+    //   GoToUpdate: "前往更新",
+    // },
     SendKey: "发送键",
     Theme: "主题",
     TightBorder: "无边框模式",
