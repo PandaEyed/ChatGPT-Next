@@ -149,15 +149,6 @@ const id: PartialLocaleType = {
       Title: "Template Input",
       SubTitle: "Pesan baru akan diisi menggunakan template ini",
     },
-
-    Update: {
-      Version: (x: string) => `Version: ${x}`,
-      IsLatest: "Versi terbaru",
-      CheckUpdate: "Periksa Pembaruan",
-      IsChecking: "Memeriksa pembaruan...",
-      FoundUpdate: (x: string) => `Versi terbaru ditemukan: ${x}`,
-      GoToUpdate: "Perbarui Sekarang",
-    },
     AutoGenerateTitle: {
       Title: "Hasilkan Judul Otomatis",
       SubTitle: "Hasilkan judul yang sesuai berdasarkan konten percakapan",

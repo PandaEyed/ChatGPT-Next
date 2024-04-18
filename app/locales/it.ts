@@ -76,14 +76,6 @@ const it: PartialLocaleType = {
       SubTitle:
         "Aggiungi forzatamente un prompt di sistema simulato di ChatGPT all'inizio della lista dei messaggi per ogni richiesta",
     },
-    Update: {
-      Version: (x: string) => `Versione: ${x}`,
-      IsLatest: "Ultima versione",
-      CheckUpdate: "Controlla aggiornamenti",
-      IsChecking: "Sto controllando gli aggiornamenti...",
-      FoundUpdate: (x: string) => `Trovata nuova versione: ${x}`,
-      GoToUpdate: "Aggiorna",
-    },
     SendKey: "Tasto invia",
     Theme: "Tema",
     TightBorder: "Schermo intero",

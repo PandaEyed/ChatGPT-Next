@@ -76,14 +76,6 @@ const ru: PartialLocaleType = {
       SubTitle:
         "Принудительно добавить симулированную системную подсказку ChatGPT в начало списка сообщений для каждого запроса",
     },
-    Update: {
-      Version: (x: string) => `Версия: ${x}`,
-      IsLatest: "Последняя версия",
-      CheckUpdate: "Проверить обновление",
-      IsChecking: "Проверка обновления...",
-      FoundUpdate: (x: string) => `Найдена новая версия: ${x}`,
-      GoToUpdate: "Обновить",
-    },
     SendKey: "Клавиша отправки",
     Theme: "Тема",
     TightBorder: "Узкая граница",

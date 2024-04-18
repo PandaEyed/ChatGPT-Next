@@ -77,14 +77,6 @@ const ko: PartialLocaleType = {
       SubTitle:
         "각 요청의 메시지 목록의 시작에 ChatGPT 시스템 프롬프트를 강제로 추가합니다",
     },
-    Update: {
-      Version: (x: string) => `버전: ${x}`,
-      IsLatest: "최신 버전",
-      CheckUpdate: "업데이트 확인",
-      IsChecking: "업데이트 확인 중...",
-      FoundUpdate: (x: string) => `새 버전 발견: ${x}`,
-      GoToUpdate: "업데이트",
-    },
     SendKey: "전송 키",
     Theme: "테마",
     TightBorder: "조밀한 테두리",

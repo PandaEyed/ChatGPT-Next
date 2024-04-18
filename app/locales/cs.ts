@@ -76,14 +76,6 @@ const cs: PartialLocaleType = {
       SubTitle:
         "Vynutit přidání simulovaného systémového promptu ChatGPT na začátek seznamu zpráv každého požadavku",
     },
-    Update: {
-      Version: (x: string) => `Verze: ${x}`,
-      IsLatest: "Aktuální verze",
-      CheckUpdate: "Zkontrolovat aktualizace",
-      IsChecking: "Kontrola aktualizace...",
-      FoundUpdate: (x: string) => `Nalezena nová verze: ${x}`,
-      GoToUpdate: "Aktualizovat",
-    },
     SendKey: "Odeslat klíč",
     Theme: "Téma",
     TightBorder: "Těsné ohraničení",

@@ -76,14 +76,6 @@ const tr: PartialLocaleType = {
       SubTitle:
         "Her istek için ileti listesinin başına simüle edilmiş bir ChatGPT sistem ipucu ekleyin",
     },
-    Update: {
-      Version: (x: string) => `Sürüm: ${x}`,
-      IsLatest: "En son sürüm",
-      CheckUpdate: "Güncellemeyi Kontrol Et",
-      IsChecking: "Güncelleme kontrol ediliyor...",
-      FoundUpdate: (x: string) => `Yeni sürüm bulundu: ${x}`,
-      GoToUpdate: "Güncelle",
-    },
     SendKey: "Gönder Tuşu",
     Theme: "Tema",
     TightBorder: "Tam Ekran",

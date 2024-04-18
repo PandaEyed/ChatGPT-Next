@@ -76,14 +76,6 @@ const de: PartialLocaleType = {
       SubTitle:
         "Erzwingt das Hinzufügen eines simulierten systemweiten Prompts von ChatGPT am Anfang der Nachrichtenliste bei jeder Anfrage",
     },
-    Update: {
-      Version: (x: string) => `Version: ${x}`,
-      IsLatest: "Neueste Version",
-      CheckUpdate: "Update prüfen",
-      IsChecking: "Update wird geprüft...",
-      FoundUpdate: (x: string) => `Neue Version gefunden: ${x}`,
-      GoToUpdate: "Aktualisieren",
-    },
     SendKey: "Senden-Taste",
     Theme: "Erscheinungsbild",
     TightBorder: "Enger Rahmen",

@@ -145,15 +145,6 @@ const bn: PartialLocaleType = {
       Title: "ইনপুট টেমপ্লেট",
       SubTitle: "নতুনতম বার্তা এই টেমপ্লেটে পূরণ হবে",
     },
-
-    Update: {
-      Version: (x: string) => `Version: ${x}`,
-      IsLatest: "Latest version",
-      CheckUpdate: "Check Update",
-      IsChecking: "Checking update...",
-      FoundUpdate: (x: string) => `Found new version: ${x}`,
-      GoToUpdate: "Update",
-    },
     SendKey: "প্রেরণ চাবি",
     Theme: "থিম",
     TightBorder: "সঙ্গতি সীমা",
