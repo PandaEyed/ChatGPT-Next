@@ -89,9 +89,8 @@ Current time: {{time}}
 export const SUMMARIZE_MODEL = "gpt-3.5-turbo-0125";
 
 export const KnowledgeCutOffDate: Record<string, string> = {
-  default: "2021-09",
-  "gpt-4-turbo": "2023-12",
-  "gpt-4-vision-preview": "2023-04",
+  default: "2024-04",
+  "gpt-4o": "2024-5"
 };
 
 export const DEFAULT_MODELS = [
@@ -100,7 +99,7 @@ export const DEFAULT_MODELS = [
     available: true,
   },
   {
-    name: "gpt-4-turbo",
+    name: "gpt-4o",
     available: true,
   },
 
