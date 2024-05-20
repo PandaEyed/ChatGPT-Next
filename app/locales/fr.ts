@@ -44,6 +44,7 @@ const fr: PartialLocaleType = {
       Prompt: "Instructions",
       Masks: "Assistants",
       Clear: "Effacer le contexte",
+      Pic: "Upload Image", 
       Settings: "Réglages",
     },
     Rename: "Renommer la conversation",

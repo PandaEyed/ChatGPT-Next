@@ -52,6 +52,7 @@ const id: PartialLocaleType = {
       Prompt: "Prompts",
       Masks: "Masks",
       Clear: "Bersihkan Percakapan",
+      Pic: "Upload Image", 
       Settings: "Pengaturan",
     },
     Rename: "Ubah Nama Chat",

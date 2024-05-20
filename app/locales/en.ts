@@ -44,6 +44,7 @@ const en: LocaleType = {
       PinToastAction: "View",
       Delete: "Delete",
       Edit: "Edit",
+      Pic: "Upload Image", 
     },
     Commands: {
       new: "Start a new chat",
@@ -64,6 +65,7 @@ const en: LocaleType = {
       Prompt: "Prompts",
       Masks: "Masks",
       Clear: "Clear Context",
+      Pic: "Upload Image", 
       Settings: "Settings",
     },
     Rename: "Rename Chat",
