@@ -30,7 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const image = fs.readFileSync(filePath);
 
     try {
-      const response = await openai.createImageCompletion({
+      const response = await openai.chat.createImageCompletion({
         model: 'gpt-4-o',
         prompt: `Describe the content of this image: ${image.toString('base64')}`,
       });
