@@ -493,10 +493,11 @@ export function ChatActions(props: {
         text={Locale.Chat.InputActions.Masks}
         icon={<MaskIcon />}
       />
+
       <ChatAction
         onClick={() => document.getElementById('image-upload-input')?.click()}
         text="Upload Image"
-        icon={<UploadIcon />}
+        icon={<img src="/path-to-your-icon.svg" alt="Upload Icon" />}
       />
       <input
         id="image-upload-input"
@@ -722,16 +723,44 @@ function _Chat() {
   //   if (!isMobileScreen) inputRef.current?.focus();
   //   setAutoScroll(true);
   // };
+  // ---------------------------------------------
+  // const doSubmit = async (userInput: string) => {
+  //   if (userInput.trim() === "") return;
+  //   const matchCommand = chatCommands.match(userInput);
+  //   if (matchCommand.matched) {
+  //     setUserInput("");
+  //     setPromptHints([]);
+  //     matchCommand.invoke();
+  //     return;
+  //   }
+  //   setIsLoading(true);
+
+  //   if (image) {
+  //     const formData = new FormData();
+  //     formData.append('image', image);
+  //     formData.append('prompt', userInput);
+
+  //     const response = await fetch('/api/image-recognition', {
+  //       method: 'POST',
+  //       body: formData,
+  //     });
+
+  //     const data = await response.json();
+  //     chatStore.onUserInput(data.description).then(() => setIsLoading(false));
+  //     setImage(null);
+  //   } else {
+  //     chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+  //   }
+
+  //   setUserInput("");
+  //   setPromptHints([]);
+  //   if (!isMobileScreen) inputRef.current?.focus();
+  //   setAutoScroll(true);
+  // };
+  // ---------------------------------------------
   
   const doSubmit = async (userInput: string) => {
     if (userInput.trim() === "") return;
-    const matchCommand = chatCommands.match(userInput);
-    if (matchCommand.matched) {
-      setUserInput("");
-      setPromptHints([]);
-      matchCommand.invoke();
-      return;
-    }
     setIsLoading(true);
 
     if (image) {
@@ -756,6 +785,8 @@ function _Chat() {
     if (!isMobileScreen) inputRef.current?.focus();
     setAutoScroll(true);
   };
+
+
 
   const onPromptSelect = (prompt: RenderPompt) => {
     setTimeout(() => {
@@ -1094,23 +1125,7 @@ function _Chat() {
 
   return (
     <div className={styles.chat} key={session.id}>
-        <ChatActions
-        showPromptModal={() => setShowPromptModal(true)}
-        scrollToBottom={scrollToBottom}
-        hitBottom={hitBottom}
-        showPromptHints={() => {
-          // Click again to close
-          if (promptHints.length > 0) {
-            setPromptHints([]);
-            return;
-          }
 
-          inputRef.current?.focus();
-          setUserInput("/");
-          onSearch("");
-        }}
-        onImageUpload={onImageUpload}
-      />
       <div className="window-header" data-tauri-drag-region>
         {isMobileScreen && (
           <div className="window-actions">
@@ -1322,28 +1337,29 @@ function _Chat() {
         <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
 
         <ChatActions
-          showPromptModal={() => setShowPromptModal(true)}
-          scrollToBottom={scrollToBottom}
-          hitBottom={hitBottom}
-          showPromptHints={() => {
-            // Click again to close
-            if (promptHints.length > 0) {
-              setPromptHints([]);
-              return;
-            }
+        showPromptModal={() => setShowPromptModal(true)}
+        scrollToBottom={scrollToBottom}
+        hitBottom={hitBottom}
+        showPromptHints={() => {
+          // Click again to close
+          if (promptHints.length > 0) {
+            setPromptHints([]);
+            return;
+          }
 
-            inputRef.current?.focus();
-            setUserInput("/");
-            onSearch("");
-          }}
-        />
-        
-        <div className={styles["chat-input-panel-inner"]}>
+          inputRef.current?.focus();
+          setUserInput("/");
+          onSearch("");
+        }}
+        onImageUpload={onImageUpload}
+      />
+      <div className={styles["chat-input-panel-inner"]}>
         {image && (
           <div className={styles["image-preview"]}>
             <img src={URL.createObjectURL(image)} alt="Preview" />
           </div>
         )}
+
           <textarea
             ref={inputRef}
             className={styles["chat-input"]}
