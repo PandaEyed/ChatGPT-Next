@@ -497,7 +497,7 @@ export function ChatActions(props: {
       <ChatAction
         onClick={() => document.getElementById('image-upload-input')?.click()}
         text={Locale.Chat.InputActions.Pic}
-        icon={<img src="/path-to-your-icon.svg" alt="Upload Icon" />}
+        icon={<UploadIcon />}
       />
       <input
         id="image-upload-input"
