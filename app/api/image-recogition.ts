@@ -32,8 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const response = await openai.createImageCompletion({
         model: 'gpt-4-o',
-        prompt: 'Describe the content of this image',
-        image: image.toString('base64'),
+        prompt: `Describe the content of this image: ${image.toString('base64')}`,
       });
 
       res.status(200).json({ description: response.data.choices[0].text });
