@@ -63,7 +63,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const response = await axios.post("https://api.openai.com/v1/chat/completions", payload, { headers });
       res.status(200).json({ description: response.data.choices[0].message.content });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      const errorMessage = (error as Error).message;
+      res.status(500).json({ error: errorMessage });
     }
   });
 };
