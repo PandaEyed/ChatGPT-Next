@@ -62,6 +62,7 @@ const cn = {
       Prompt: "快捷指令",
       Masks: "所有面具",
       Clear: "清除聊天",
+      Pic: "添加图片",
       Settings: "对话设置",
     },
     Rename: "重命名对话",
