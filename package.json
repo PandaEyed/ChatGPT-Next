@@ -16,6 +16,7 @@
     "proxy-dev": "sh ./scripts/init-proxy.sh && proxychains -f ./scripts/proxychains.conf yarn dev"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "axios": "^0.21.1",
     "formidable": "^2.0.1",
     "@fortaine/fetch-event-source": "^3.0.6",
