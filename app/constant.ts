@@ -169,15 +169,33 @@ const anthropicModels = [
 ];
 
 export const DEFAULT_MODELS = [
-  {
-    name: "gpt-3.5-turbo-0125",
+  ...openaiModels.map((name) => ({
+    name,
     available: true,
-  },
-  {
-    name: "gpt-4o",
+    provider: {
+      id: "openai",
+      providerName: "OpenAI",
+      providerType: "openai",
+    },
+  })),
+  ...googleModels.map((name) => ({
+    name,
     available: true,
-  },
-
+    provider: {
+      id: "google",
+      providerName: "Google",
+      providerType: "google",
+    },
+  })),
+  ...anthropicModels.map((name) => ({
+    name,
+    available: true,
+    provider: {
+      id: "anthropic",
+      providerName: "Anthropic",
+      providerType: "anthropic",
+    },
+  })),
 ] as const;
 
 export const CHAT_PAGE_SIZE = 15;
