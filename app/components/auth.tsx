@@ -1,98 +1,97 @@
-import { NextRequest } from "next/server";
-import { getServerSideConfig } from "../config/server";
-import md5 from "spark-md5";
-import { ACCESS_CODE_PREFIX, ModelProvider } from "../constant";
+import styles from "./auth.module.scss";
+import { IconButton } from "./button";
 
-function getIP(req: NextRequest) {
-  let ip = req.ip ?? req.headers.get("x-real-ip");
-  const forwardedFor = req.headers.get("x-forwarded-for");
+import { useNavigate } from "react-router-dom";
+import { Path } from "../constant";
+import { useAccessStore } from "../store";
+import Locale from "../locales";
 
-  if (!ip && forwardedFor) {
-    ip = forwardedFor.split(",").at(0) ?? "";
-  }
+import BotIcon from "../icons/bot.svg";
+import { useEffect } from "react";
+import { getClientConfig } from "../config/client";
 
-  return ip;
-}
+export function AuthPage() {
+  const navigate = useNavigate();
+  const accessStore = useAccessStore();
 
-function parseApiKey(bearToken: string) {
-  const token = bearToken.trim().replaceAll("Bearer ", "").trim();
-  const isApiKey = !token.startsWith(ACCESS_CODE_PREFIX);
+  const goHome = () => navigate(Path.Home);
+  const goChat = () => navigate(Path.Chat);
+  const resetAccessCode = () => {
+    accessStore.update((access) => {
+      access.openaiApiKey = "";
+      access.accessCode = "";
+    });
+  }; // Reset access code to empty string
 
-  return {
-    accessCode: isApiKey ? "" : token.slice(ACCESS_CODE_PREFIX.length),
-    apiKey: isApiKey ? token : "",
-  };
-}
-
-export function auth(req: NextRequest, modelProvider: ModelProvider) {
-  const authToken = req.headers.get("Authorization") ?? "";
-
-  // check if it is openai api key or user token
-  const { accessCode, apiKey } = parseApiKey(authToken);
-
-  const hashedCode = md5.hash(accessCode ?? "").trim();
-
-  const serverConfig = getServerSideConfig();
-  console.log("[Auth] allowed hashed codes: ", [...serverConfig.codes]);
-  console.log("[Auth] got access code:", accessCode);
-  console.log("[Auth] hashed access code:", hashedCode);
-  console.log("[User IP] ", getIP(req));
-  console.log("[Time] ", new Date().toLocaleString());
-
-  if (serverConfig.needCode && !serverConfig.codes.has(hashedCode) && !apiKey) {
-    return {
-      error: true,
-      msg: !accessCode ? "empty access code" : "wrong access code",
-    };
-  }
-
-  if (serverConfig.hideUserApiKey && !!apiKey) {
-    return {
-      error: true,
-      msg: "you are not allowed to access with your own api key",
-    };
-  }
-
-  // if user does not provide an api key, inject system api key
-  if (!apiKey) {
-    const serverConfig = getServerSideConfig();
-
-    // const systemApiKey =
-    //   modelProvider === ModelProvider.GeminiPro
-    //     ? serverConfig.googleApiKey
-    //     : serverConfig.isAzure
-    //     ? serverConfig.azureApiKey
-    //     : serverConfig.apiKey;
-
-    let systemApiKey: string | undefined;
-
-    switch (modelProvider) {
-      case ModelProvider.GeminiPro:
-        systemApiKey = serverConfig.googleApiKey;
-        break;
-      case ModelProvider.Claude:
-        systemApiKey = serverConfig.anthropicApiKey;
-        break;
-      case ModelProvider.GPT:
-      default:
-        if (serverConfig.isAzure) {
-          systemApiKey = serverConfig.azureApiKey;
-        } else {
-          systemApiKey = serverConfig.apiKey;
-        }
+  useEffect(() => {
+    if (getClientConfig()?.isApp) {
+      navigate(Path.Settings);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    if (systemApiKey) {
-      console.log("[Auth] use system api key");
-      req.headers.set("Authorization", `Bearer ${systemApiKey}`);
-    } else {
-      console.log("[Auth] admin did not provide an api key");
-    }
-  } else {
-    console.log("[Auth] use user api key");
-  }
+  return (
+    <div className={styles["auth-page"]}>
+      <div className={`no-dark ${styles["auth-logo"]}`}>
+        <BotIcon />
+      </div>
 
-  return {
-    error: false,
-  };
+      <div className={styles["auth-title"]}>{Locale.Auth.Title}</div>
+      <div className={styles["auth-tips"]}>{Locale.Auth.Tips}</div>
+
+      <input
+        className={styles["auth-input"]}
+        type="password"
+        placeholder={Locale.Auth.Input}
+        value={accessStore.accessCode}
+        onChange={(e) => {
+          accessStore.update(
+            (access) => (access.accessCode = e.currentTarget.value),
+          );
+        }}
+      />
+      {!accessStore.hideUserApiKey ? (
+        <>
+          <div className={styles["auth-tips"]}>{Locale.Auth.SubTips}</div>
+          <input
+            className={styles["auth-input"]}
+            type="password"
+            placeholder={Locale.Settings.Access.OpenAI.ApiKey.Placeholder}
+            value={accessStore.openaiApiKey}
+            onChange={(e) => {
+              accessStore.update(
+                (access) => (access.openaiApiKey = e.currentTarget.value),
+              );
+            }}
+          />
+          <input
+            className={styles["auth-input"]}
+            type="password"
+            placeholder={Locale.Settings.Access.Google.ApiKey.Placeholder}
+            value={accessStore.googleApiKey}
+            onChange={(e) => {
+              accessStore.update(
+                (access) => (access.googleApiKey = e.currentTarget.value),
+              );
+            }}
+          />
+        </>
+      ) : null}
+
+      <div className={styles["auth-actions"]}>
+        <IconButton
+          text={Locale.Auth.Confirm}
+          type="primary"
+          onClick={goChat}
+        />
+        <IconButton
+          text={Locale.Auth.Later}
+          onClick={() => {
+            resetAccessCode();
+            goHome();
+          }}
+        />
+      </div>
+    </div>
+  );
 }
