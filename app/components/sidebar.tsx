@@ -1,7 +1,6 @@
 import { useEffect, useRef, useMemo } from "react";
 import { useState } from "react";
 
-import Image from "next/image";
 import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
@@ -15,7 +14,7 @@ import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
 import DragIcon from "../icons/drag.svg";
 import WechatPng from "../icons/wechat.png";
-import WeChatIcon from "../icons/wechat.svg";
+
 
 import Locale from "../locales";
 
@@ -153,13 +152,14 @@ export function SideBar(props: { className?: string }) {
   const closePopup = () => {
     setIsPopupOpen(false);
   };
-
   useHotKey();
+
 
   return (
     <div
-      className={`${styles.sidebar} ${props.className} ${shouldNarrow && styles["narrow-sidebar"]
-        }`}
+      className={`${styles.sidebar} ${props.className} ${
+        shouldNarrow && styles["narrow-sidebar"]
+      }`}
       style={{
         // #3016 disable transition on ios mobile screen
         transition: isMobileScreen && isIOSMobile ? "none" : undefined,
@@ -170,10 +170,7 @@ export function SideBar(props: { className?: string }) {
           Xiao-Ming&apos;s ChatGPT
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Welcome to XiaoMing&apos;s ChatGPT.
-        </div>
-        <div className={styles["sidebar-sub-title"]}>
-          内测中..欢迎邀请朋友体验～
+           内测中...有 bug 欢迎随时联系我
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
@@ -232,7 +229,9 @@ export function SideBar(props: { className?: string }) {
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>
-            <IconButton icon={<WeChatIcon />} onClick={openPopup} />
+              <button onClick={openPopup}>
+                <IconButton icon={<GithubIcon />} shadow />
+              </button>
           </div>
         </div>
         {isPopupOpen && (
@@ -240,8 +239,8 @@ export function SideBar(props: { className?: string }) {
             <div className={styles["popup-content"]}>
               <h1>联系小明</h1>
               <p>如果使用中遇到任何问题，请联系我。</p>
-              <Image src={WechatPng} alt="Xiao-Ming's WeChat" />
-              <IconButton icon={<CloseIcon />} onClick={closePopup} />
+              <Image src={<WechatPng/>} alt="Xiao-Ming's WeChat" />
+              <button onClick={closePopup}>关闭</button>
             </div>
           </div>
         )}
